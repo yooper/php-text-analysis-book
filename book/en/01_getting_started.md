@@ -69,8 +69,6 @@ php textconsole pta:list
 
 You will receive back a list of available corpora. 
 
-
-
 ### Install a Corpus
 If you want to install any corpus use the following command:
 
@@ -79,6 +77,19 @@ If you want to install any corpus use the following command:
 ```
 
 This will install the corpus into the **storage/corpus/twitter_samples** directory. 
+
+### Installing Stanford's NER and POS Tagger
+PTA allows you to easily add NER and POS Tagging using Stanford's prebuilt libraries. 
+To use the libraries Java must be installed on your system
+
+```
+# install the ner tagger
+php textconsole pta:install:package stanford_ner_tagger
+# install the pos tagger
+php textconsole pta:install:package stanford_pos_tagger
+```
+
+
 
 
 

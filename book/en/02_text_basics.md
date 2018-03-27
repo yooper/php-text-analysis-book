@@ -12,11 +12,81 @@ ls -la storage/corpora/gutenberg/
 
 # Interactive Scripting
 We are going to take an interactive scripting approach while studying a given book.
-This code can easily be included into script within your application
+This code can easily be included into script within your application. To launch 
+interactive mode use the following command. 
+
+```
+bash interactive
+```
+
+This loads the library into an interactive PHP shell. Let's load a Gutenberg book into memory.
+
+```
+bash interactive
+$list = gutenberg_list();
+print_array($list);
+$text = gutenberg('carroll-alice.txt');
+$corpus = text($text);
+```
+
+**$corpus** is a TextCorpus object, see https://github.com/yooper/php-text-analysis/blob/master/src/Corpus/TextCorpus.php
+for API details.
 
 
-### Searching
-Lets look at some ways to search the text.
+## TextCorpus
+The TextCorpus object is the easiest way to gather summary statistics about text.
+
+### Searching 
+
+To get all the positions within a string that a word is used, use the findAll function;
+
+```php
+$text = gutenberg('carroll-alice.txt');
+$corpus = text($text);
+$positions = $corpus->findAll('mushroom');
+var_dump($positions);
+````
+
+### Concordance
+
+Concordance allows you to find the context of how a word is being used in a text.
+
+```php
+$text = gutenberg('carroll-alice.txt');
+$corpus = text($text);
+$concordances = $corpus->concordance('mushroom');
+print_array($concordances, '/* ', ' */'.PHP_EOL);
+
+/* . There was a large mushroom growing near her, a */
+/* ver the edge of the mushroom, and her eyes immed */
+/* it got down off the mushroom, and crawled away i */
+/* to herself. 'Of the mushroom,' said the Caterpil */
+/* thoughtfully at the mushroom for a minute, tryin */
+/*  held the pieces of mushroom in her hands, and s */
+/* the lefthand bit of mushroom, and raised herself */
+/* ork nibbling at the mushroom (she had kept a pie */
+
+```
+
+You can easily adjust the window size of the text surrounding the word you are
+looking for, by setting the second parameter of the concordance function.  
+
+```php
+$text = gutenberg('carroll-alice.txt');
+$corpus = text($text);
+$concordances = $corpus->concordance('mushroom', 30); // default value is 20
+print_array($concordances, '/* ', ' */'.PHP_EOL);
+```
+
+### Percentage
+
+
+
+### Count
+
+### Lexical Diversity
+
+
 
 
 
