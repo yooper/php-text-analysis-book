@@ -80,14 +80,52 @@ print_array($concordances, '/* ', ' */'.PHP_EOL);
 
 ### Percentage
 
+If you need to find out what percentage of the text uses a word / token you can
+use the following API command. 
+
+```php
+$text = gutenberg('carroll-alice.txt');
+$corpus = text($text);
+$percent = $corpus->percentage('mushroom');
+echo $percent, PHP_EOL;
+```
+
 
 
 ### Count
 
+To get the frequency of the word / token you can use the *count* API call
+
+```php
+$text = gutenberg('carroll-alice.txt');
+$corpus = text($text);
+$percent = $corpus->percentage('mushroom');
+echo $percent, PHP_EOL;
+```
+
+
 ### Lexical Diversity
 
+There are a couple lexical diversity algorithms available:
+* Naive (default)
+* YuleI
+* YuleK  
 
+```php
+// default Lexical Diversity uses Naive
+$text = gutenberg('carroll-alice.txt');
+$corpus = text($text);
+$ld = $corpus->getLexicalDiversity();
+echo $ld, PHP_EOL;
+```
 
+```php
+// use Lexical Diversity algorithm YuleI
+$text = gutenberg('carroll-alice.txt');
+$corpus = text($text);
+$ld = $corpus->getLexicalDiversity(\TextAnalysis\LexicalDiversity\YuleI::class);
+echo $ld, PHP_EOL;
+```
 
 
 
